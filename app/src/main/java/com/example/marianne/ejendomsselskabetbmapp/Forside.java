@@ -13,8 +13,16 @@ public class Forside extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forside);
+
+        MyDBHandler myDBHandler = new MyDBHandler(this, null, null, 1);
+
+        Inspectionlist inspectionlist = new Inspectionlist("carl");
+
+        myDBHandler.addProduct(inspectionlist);
     }
 
+
+// test
     public void addButtonOnClick(View view){
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);

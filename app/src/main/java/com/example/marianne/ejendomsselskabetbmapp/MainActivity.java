@@ -10,12 +10,23 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    MyDBHandler myDBHandler;
+    TextView txt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        myDBHandler = new MyDBHandler(this, null, null, 1);
+        printDatabase();
+        txt = (TextView) findViewById(R.id.txtTaskDescription);
 
+
+    }
+
+    public void printDatabase(){
+        String dbString = myDBHandler.databaseToString();
+        txt.setText(dbString);
 
     }
 
