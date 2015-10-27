@@ -9,7 +9,7 @@ import android.content.ContentValues;
 
 public class MyDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "inspectionlist.db";
     public static final String TABLE_INSPECTIONLIST = "inspectionlist";
     public static final String COLUMN_ID = "_id";
@@ -44,11 +44,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXITS " + TABLE_INSPECTIONLIST);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INSPECTIONLIST);
 
         onCreate(db);
 
-    }
+            }
 
     public void addProduct(Inspectionlist product) {
         ContentValues values = new ContentValues();
@@ -69,8 +69,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         c.moveToFirst();
 
         while (!c.isAfterLast()){
-            if (c.getString(c.getColumnIndex("inspectionlist"))!=null){
-                dbString += c.getString(c.getColumnIndex("inspectionlist"));
+            if (c.getString(c.getColumnIndex("taskdescription"))!=null){
+                dbString += c.getString(c.getColumnIndex("taskdescription"));
                 dbString += "\n";
             }
             c.moveToNext();
