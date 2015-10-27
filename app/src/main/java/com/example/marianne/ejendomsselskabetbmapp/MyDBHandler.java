@@ -23,11 +23,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PICTUREADDRESS = "pictureaddress";
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String query = "CREATE TABLE "
 
     }
 
