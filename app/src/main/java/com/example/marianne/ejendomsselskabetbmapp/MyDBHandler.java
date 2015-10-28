@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 import android.content.Context;
 import android.content.ContentValues;
+import android.util.Log;
 
 public class MyDBHandler extends SQLiteOpenHelper {
 
@@ -23,21 +24,21 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PICTUREADDRESS = "pictureaddress";
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+        super(context, DATABASE_NAME, factory, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_INSPECTIONLIST + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_DATE + "TEXT, " +
-                COLUMN_ROOM + "TEXT, " +
-                COLUMN_ADDRESS + "TEXT, " +
-                COLUMN_ACQUISITION + "INTEGER DEFAULT 0, " +
-                COLUMN_TASKDESCRIPTION + "TEXT, " +
-                COLUMN_SCHEDULED + "INTEGER DEFAULT 0, " +
-                COLUMN_COMPLETED + "INTEGER DEFAULT 0, " +
-                COLUMN_PICTUREADDRESS + "TEXT" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTO_INCREMENT, " +
+                COLUMN_DATE + " TEXT, " +
+                COLUMN_ROOM + " TEXT, " +
+                COLUMN_ADDRESS + " TEXT, " +
+                COLUMN_ACQUISITION + " INTEGER DEFAULT 0, " +
+                COLUMN_TASKDESCRIPTION + " TEXT, " +
+                COLUMN_SCHEDULED + " INTEGER DEFAULT 0, " +
+                COLUMN_COMPLETED + " INTEGER DEFAULT 0, " +
+                COLUMN_PICTUREADDRESS + " TEXT" +
                 ");";
         db.execSQL(query);
     }
@@ -69,6 +70,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         c.moveToFirst();
 
         while (!c.isAfterLast()){
+
+            Log.d("dbString i dbhandler", " og det var" + c.getString(c.getColumnIndex("taskdescription")));
             if (c.getString(c.getColumnIndex("taskdescription"))!=null){
                 dbString += c.getString(c.getColumnIndex("taskdescription"));
                 dbString += "\n";

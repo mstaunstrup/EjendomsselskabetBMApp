@@ -18,9 +18,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myDBHandler = new MyDBHandler(this, null, null, 1);
-        printDatabase();
         txt = (TextView) findViewById(R.id.txtTaskDescription);
-
+        printDatabase();
 
     }
 

@@ -20,7 +20,7 @@ public class Inspectionlist {
     public Inspectionlist(){}
 
     public Inspectionlist(String room){
-        this._room = room;
+        this._taskdescription = room;
     }
     // En fuld constructor dog uden id
     public Inspectionlist(Date _date, String _room, String _addres, Boolean _acquisition,
