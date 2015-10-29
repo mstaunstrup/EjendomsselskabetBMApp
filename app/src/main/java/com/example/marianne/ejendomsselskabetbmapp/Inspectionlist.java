@@ -1,6 +1,8 @@
 package com.example.marianne.ejendomsselskabetbmapp;
 
 
+import android.util.Log;
+
 import org.w3c.dom.Text;
 
 import java.util.Date;
@@ -8,13 +10,13 @@ import java.util.Date;
 public class Inspectionlist {
 
     private int _id;
-    private Date _date;
+    private String _date;
     private String _room; // Skal laves til enum
     private String _addres; // Skal laves til enum
-    private Boolean _acquisition;
+    private int _acquisition;
     private String _taskdescription;
-    private Boolean _scheduled;
-    private Boolean _completed;
+    private int _scheduled;
+    private int _completed;
     private String _pictureaddress;
 
     public Inspectionlist(){}
@@ -22,9 +24,20 @@ public class Inspectionlist {
     public Inspectionlist(String room){
         this._taskdescription = room;
     }
+
+    public Inspectionlist(String _date, String _room, String _addres, int _acquisition,
+                          String _taskdescription, int _scheduled
+    ) {
+        this._date = _date;
+        this._room = _room;
+        this._addres = _addres;
+        this._acquisition = _acquisition;
+        this._taskdescription = _taskdescription;
+        this._scheduled = _scheduled;
+    }
     // En fuld constructor dog uden id
-    public Inspectionlist(Date _date, String _room, String _addres, Boolean _acquisition,
-                          String _taskdescription, Boolean _scheduled, Boolean _completed,
+    public Inspectionlist(String _date, String _room, String _addres, int _acquisition,
+                          String _taskdescription, int _scheduled, int _completed,
                           String _pictureaddress) {
         this._date = _date;
         this._room = _room;
@@ -34,9 +47,10 @@ public class Inspectionlist {
         this._scheduled = _scheduled;
         this._completed = _completed;
         this._pictureaddress = _pictureaddress;
+        Log.d("data til db: ", this._date.toString() +" "+ this._room + " " + this._taskdescription);
     }
 
-    public void set_date(Date _date) {
+    public void set_date(String _date) {
         this._date = _date;
     }
 
@@ -48,7 +62,7 @@ public class Inspectionlist {
         this._addres = _addres;
     }
 
-    public void set_acquisition(Boolean _acquisition) {
+    public void set_acquisition(int _acquisition) {
         this._acquisition = _acquisition;
     }
 
@@ -56,11 +70,11 @@ public class Inspectionlist {
         this._taskdescription = _taskdescription;
     }
 
-    public void set_scheduled(Boolean _scheduled) {
+    public void set_scheduled(int _scheduled) {
         this._scheduled = _scheduled;
     }
 
-    public void set_completed(Boolean _completed) {
+    public void set_completed(int _completed) {
         this._completed = _completed;
     }
 
@@ -72,7 +86,7 @@ public class Inspectionlist {
         return _id;
     }
 
-    public Date get_date() {
+    public String get_date() {
         return _date;
     }
 
@@ -84,7 +98,7 @@ public class Inspectionlist {
         return _addres;
     }
 
-    public Boolean get_acquisition() {
+    public int get_acquisition() {
         return _acquisition;
     }
 
@@ -92,11 +106,11 @@ public class Inspectionlist {
         return _taskdescription;
     }
 
-    public Boolean get_scheduled() {
+    public int get_scheduled() {
         return _scheduled;
     }
 
-    public Boolean get_completed() {
+    public int get_completed() {
         return _completed;
     }
 

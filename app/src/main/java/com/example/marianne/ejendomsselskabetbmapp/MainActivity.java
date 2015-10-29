@@ -2,16 +2,29 @@ package com.example.marianne.ejendomsselskabetbmapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.DateFormat;
 
 public class MainActivity extends AppCompatActivity {
 
     MyDBHandler myDBHandler;
     TextView txt;
+    EditText taskDescrip, roomNr, address;
+    CheckBox acquisi, scheduled;
+    DatePicker date;
+    Button btngemData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,10 +32,46 @@ public class MainActivity extends AppCompatActivity {
 
         myDBHandler = new MyDBHandler(this, null, null, 1);
         txt = (TextView) findViewById(R.id.txtTaskDescription);
-        printDatabase();
+        taskDescrip = (EditText)findViewById(R.id.etxTaskDescription);
+        roomNr = (EditText)findViewById(R.id.etxRoom);
+        address = (EditText)findViewById(R.id.etxAddress);
+        acquisi = (CheckBox)findViewById(R.id.chbAcquisition);
+        scheduled = (CheckBox)findViewById(R.id.chbScheduled);
+        date = (DatePicker)findViewById(R.id.dtpDate);
+        btngemData = (Button)findViewById(R.id.btnSaveTask);
+
+//        printDatabase();
+        addData();
 
     }
 
+    public void addData(){
+        btngemData.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        String selectedDate = DateFormat.getDateInstance().format(date.getYear());
+                        Log.d("Valgte år er: ", selectedDate);
+                        Inspectionlist myList = new Inspectionlist(selectedDate,
+                                roomNr.getText().toString(),
+                                address.getText().toString(),
+                                (acquisi.isChecked() ? 1 : 0),
+                                taskDescrip.getText().toString(),
+                                (scheduled.isChecked() ? 1 : 0)
+                        );
+                        boolean isInserted = myDBHandler.GemData(myList);
+
+//boolean isInserted =
+
+                        if (isInserted = true)
+                            Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(MainActivity.this, "Data not Inserted", Toast.LENGTH_LONG).show();
+                    }
+                }
+        );}
     public void printDatabase(){
         String dbString = myDBHandler.databaseToString();
         txt.setText(dbString);

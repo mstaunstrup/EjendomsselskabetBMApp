@@ -43,6 +43,24 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+
+    public boolean GemData(Inspectionlist data){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TASKDESCRIPTION,data.get_taskdescription());
+        values.put(COLUMN_ROOM, data.get_room());
+        values.put(COLUMN_ADDRESS,data.get_addres());
+        values.put(COLUMN_ACQUISITION,data.get_acquisition());
+        values.put(COLUMN_SCHEDULED, data.get_scheduled());
+        values.put(COLUMN_DATE, data.get_date().toString());
+        long result = db.insert(TABLE_INSPECTIONLIST,null,values);
+        if(result== -1)
+        {Log.d("Kom ikke ind", result + "");
+            return false;}
+        else{
+            Log.d("Kom ind", result + "");
+            return true;}
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INSPECTIONLIST);

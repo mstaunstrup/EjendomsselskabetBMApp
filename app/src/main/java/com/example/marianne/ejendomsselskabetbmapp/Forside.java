@@ -19,12 +19,8 @@ public class Forside extends AppCompatActivity {
         MyDBHandler myDBHandler = new MyDBHandler(this, null, null, 1);
 
 //        Inspectionlist inspectionlist = new Inspectionlist("carl");
-        Date date = new Date(2015, 12, 9);
-        Inspectionlist inspectionlist = new Inspectionlist(date, "A12", "En anden vej", null,
-                "gør noget", null, null,
-                null);
-
-        myDBHandler.addProduct(inspectionlist);
+//
+//        myDBHandler.addProduct(inspectionlist);
     }
 
 
