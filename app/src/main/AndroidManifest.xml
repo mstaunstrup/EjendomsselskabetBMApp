@@ -20,6 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".TaskListe"
+            android:label="@string/title_activity_task_liste"
+            android:parentActivityName=".Forside" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marianne.ejendomsselskabetbmapp.Forside" />
+        </activity>
     </application>
 
 </manifest>

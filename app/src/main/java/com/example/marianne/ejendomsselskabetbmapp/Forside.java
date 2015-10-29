@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.Date;
+
 public class Forside extends AppCompatActivity {
 
     @Override
@@ -16,7 +18,11 @@ public class Forside extends AppCompatActivity {
 
         MyDBHandler myDBHandler = new MyDBHandler(this, null, null, 1);
 
-        Inspectionlist inspectionlist = new Inspectionlist("carl");
+//        Inspectionlist inspectionlist = new Inspectionlist("carl");
+        Date date = new Date(2015, 12, 9);
+        Inspectionlist inspectionlist = new Inspectionlist(date, "A12", "En anden vej", null,
+                "gør noget", null, null,
+                null);
 
         myDBHandler.addProduct(inspectionlist);
     }
@@ -25,6 +31,10 @@ public class Forside extends AppCompatActivity {
 // test
     public void addButtonOnClick(View view){
         Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+    public void listOfTaskButtonOnClick(View view){
+        Intent intent = new Intent(this,TaskListe.class);
         startActivity(intent);
     }
 

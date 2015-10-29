@@ -22,7 +22,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_SCHEDULED = "scheduled";
     public static final String COLUMN_COMPLETED = "completed";
     public static final String COLUMN_PICTUREADDRESS = "pictureaddress";
-
+    public static final String[]ALL_KEYS = new String[]{COLUMN_ID, COLUMN_DATE, COLUMN_ROOM, COLUMN_ADDRESS, COLUMN_ACQUISITION, COLUMN_TASKDESCRIPTION, COLUMN_SCHEDULED, COLUMN_COMPLETED,COLUMN_PICTUREADDRESS};
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, 2);
     }
@@ -30,7 +30,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_INSPECTIONLIST + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTO_INCREMENT, " +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_DATE + " TEXT, " +
                 COLUMN_ROOM + " TEXT, " +
                 COLUMN_ADDRESS + " TEXT, " +
@@ -58,6 +58,16 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_INSPECTIONLIST, null, values);
         db.close();
     }
+public Cursor GetAllRows(){
+    String where = null;
+    SQLiteDatabase db = getWritableDatabase();
+    Cursor c = db.query(true, TABLE_INSPECTIONLIST,ALL_KEYS, where, null, null,null,null,null);
+    if(c!=null){
+        c.moveToFirst();
+
+    }
+    return c;
+}
 
     public String databaseToString(){
         String dbString = "";
