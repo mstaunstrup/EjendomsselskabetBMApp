@@ -20,10 +20,7 @@ public class TaskListe extends AppCompatActivity {
 
         PopulateListViewDate();
     }
-//    public void OpenDB(){
-//myDB = new MyDBHandler(this, null, null 1);
-//        myDB.O
-//    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
