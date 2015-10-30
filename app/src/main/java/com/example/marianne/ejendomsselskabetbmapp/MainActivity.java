@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Date;
 import java.text.DateFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-
-                        String selectedDate = DateFormat.getDateInstance().format(date.getYear());
-                        Log.d("Valgte år er: ", selectedDate);
+                        Date dato = new Date(date.getYear()-1900,date.getMonth(),date.getDayOfMonth());
+                        //String selectedDate = DateFormat.getDateInstance().format(date.getYear());
+                        String selectedDate = date.getDayOfMonth() + "/" + (date.getMonth()+1) + "/" + date.getYear();
+                        Log.d("Valgte år er: ", selectedDate +" "+ dato.toString());
                         Inspectionlist myList = new Inspectionlist(selectedDate,
                                 roomNr.getText().toString(),
                                 address.getText().toString(),
@@ -63,10 +65,14 @@ public class MainActivity extends AppCompatActivity {
                         );
                         boolean isInserted = myDBHandler.GemData(myList);
 
-//boolean isInserted =
-
-                        if (isInserted = true)
+                        if (isInserted = true) {
                             Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
+                            taskDescrip.setText("");
+                            roomNr.setText("");
+                            address.setText("");
+                            acquisi.setChecked(false);
+                            scheduled.setChecked(false);
+                        }
                         else
                             Toast.makeText(MainActivity.this, "Data not Inserted", Toast.LENGTH_LONG).show();
                     }
