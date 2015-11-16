@@ -16,6 +16,7 @@ public class TaskListe extends AppCompatActivity {
 
     MyDBHandler myDB;
     public final static String NAME_EXTRA = "com.example.marianne.ejendomsselskabetbmapp.COLUMN_ID";
+    SimpleCursorAdapter myCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class TaskListe extends AppCompatActivity {
         Cursor cursor = myDB.GetAllRows();
         String[] fromFieldNames = new String[]{MyDBHandler.COLUMN_TASKDESCRIPTION, MyDBHandler.COLUMN_DATE, MyDBHandler.COLUMN_ROOM};
         int[] toViewID = new int[]{R.id.txtTask, R.id.txtdate, R.id.txtRoom};
-        SimpleCursorAdapter myCursorAdapter;
+
         myCursorAdapter = new SimpleCursorAdapter(getBaseContext(), R.layout.item_layout2, cursor, fromFieldNames, toViewID,0);
 
         ListView taskList = (ListView)findViewById(R.id.lsvTaskDate);
@@ -66,8 +67,18 @@ public class TaskListe extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent singleTask = new Intent(TaskListe.this, SingleTask.class);
+                        // henter cursoren, så jeg kan bruge den
+                        Cursor c = ((SimpleCursorAdapter)myCursorAdapter).getCursor();
+//flytter cursor til den valgte position
+                        c.moveToPosition(position);
+// henter string fra column 5 i db
+                        String taskDescription = c.getString(5);
+
+
+                        Log.d("Sendt til singleTask ", taskDescription);
+                        singleTask.putExtra(NAME_EXTRA, taskDescription);
                         Log.d("Sendt til singleTask ", String.valueOf(id));
-                        singleTask.putExtra(NAME_EXTRA, String.valueOf(id));
+                        //singleTask.putExtra(NAME_EXTRA, String.valueOf(id));
 
                         startActivity(singleTask);
                         //String item = String.valueOf(parent.getItemAtPosition(position));

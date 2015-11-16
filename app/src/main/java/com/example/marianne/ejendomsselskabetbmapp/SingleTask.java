@@ -22,11 +22,11 @@ public class SingleTask extends AppCompatActivity {
         passedVar = getIntent().getStringExtra(TaskListe.NAME_EXTRA);
         Log.d("Valgte TASK er: ", passedVar);
 
-        String ulla = db.getTask(Integer.parseInt(passedVar));
+        //String taskDescription = db.getTask(Integer.parseInt(passedVar));
         passedView = (TextView)findViewById(R.id.passedText);
         //passedView.setText("You chose " + String.valueOf(myTask._taskdescription));
         passedView.setText("You chose " + passedVar);
-        Log.d("Passed var Task", ulla);
+        Log.d("Passed var Task", passedVar);
     }
 
     @Override
