@@ -12,6 +12,7 @@ import android.widget.SimpleCursorAdapter;
 public class TaskListe extends AppCompatActivity {
 
     MyDBHandler myDB;
+    public final static String NAME_EXTRA = "com.example.marianne.ejendomsselskabetbmapp.COLUMN_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

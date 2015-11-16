@@ -79,7 +79,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 public Cursor GetAllRows(){
     String where = null;
     SQLiteDatabase db = getWritableDatabase();
-    Cursor c = db.query(true, TABLE_INSPECTIONLIST,ALL_KEYS, where, null, null,null,null,null);
+    Cursor c = db.query(true, TABLE_INSPECTIONLIST, ALL_KEYS, where, null, null, null, null, null);
     if(c!=null){
         c.moveToFirst();
 
@@ -91,6 +91,29 @@ public Cursor GetAllRows(){
         String dbString = "";
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_INSPECTIONLIST + " WHERE 1";
+
+        //Cursor point to a location in your results
+        Cursor c = db.rawQuery(query, null);
+        //Move to the first row in your results
+        c.moveToFirst();
+
+        while (!c.isAfterLast()){
+
+            Log.d("dbString i dbhandler", " og det var" + c.getString(c.getColumnIndex("taskdescription")));
+            if (c.getString(c.getColumnIndex("taskdescription"))!=null){
+                dbString += c.getString(c.getColumnIndex("taskdescription"));
+                dbString += "\n";
+            }
+            c.moveToNext();
+        }
+        db.close();
+        return dbString;
+    }
+
+    public String getTask(int taskId){
+        String dbString = "";
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_INSPECTIONLIST + " WHERE " + COLUMN_ID + " = " + taskId;
 
         //Cursor point to a location in your results
         Cursor c = db.rawQuery(query, null);
