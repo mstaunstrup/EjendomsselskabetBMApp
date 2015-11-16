@@ -1,11 +1,14 @@
 package com.example.marianne.ejendomsselskabetbmapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -57,5 +60,20 @@ public class TaskListe extends AppCompatActivity {
         ListView taskList = (ListView)findViewById(R.id.lsvTaskDate);
 
         taskList.setAdapter(myCursorAdapter);
+
+        taskList.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent singleTask = new Intent(TaskListe.this, SingleTask.class);
+                        Log.d("Sendt til singleTask ", String.valueOf(id));
+                        singleTask.putExtra(NAME_EXTRA, String.valueOf(id));
+
+                        startActivity(singleTask);
+                        //String item = String.valueOf(parent.getItemAtPosition(position));
+                        //Toast.makeText(TaskListe.this, item, Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
     }
 }
