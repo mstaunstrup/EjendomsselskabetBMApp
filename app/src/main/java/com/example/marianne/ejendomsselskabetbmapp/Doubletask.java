@@ -4,29 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.util.Log;
 
 public class SingleTask extends AppCompatActivity {
-
-    String passedVar = null;
-    private TextView passedView = null;
-    MyDBHandler db;
-    Inspectionlist myTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_task);
-
-        passedVar = getIntent().getStringExtra(TaskListe.NAME_EXTRA);
-        Log.d("Valgte TASK er: ", passedVar);
-
-        //String taskDescription = db.getTask(Integer.parseInt(passedVar));
-        passedView = (TextView)findViewById(R.id.passedText);
-        //passedView.setText("You chose " + String.valueOf(myTask._taskdescription));
-        passedView.setText("You chose " + passedVar);
-        Log.d("Passed var Task", passedVar);
     }
 
     @Override
